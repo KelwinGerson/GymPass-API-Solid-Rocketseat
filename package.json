@@ -1,24 +1,26 @@
 {
   "name": "03-api-solid",
   "version": "1.0.0",
-  "description": "- [ ] It must be possible to create a new user;\r - [ ] It must be possible to authenticate;\r - [ ] It must be possible get a login profile.\r - [ ] It must be possible get a number of check-ins realized of user;\r - [ ] It must be possible a user get your historic check-in;\r - [ ] It must be possible the user search nearby gyms;\r - [ ] It must be possible search gym by name;\r - [ ] It must be possible the user realize check-in in the gym;\r - [ ] It must be possible validate the check-in of user;\r - [ ] It must be possible create a register gym;",
+  "description": "GymPass APP",
   "main": "index.js",
   "scripts": {
-    "start" : "node build/server.js",
-    "start:dev" : "tsx watch src/server.ts",
-    "build" : "tsup src --out-dir build",
+    "start": "node build/server.js",
+    "start:dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.16.3",
-    "tsup": "^6.7.0",
-    "tsx": "^3.12.7",
-    "typescript": "^5.0.4"
+    "@types/node": "18.16.3",
+    "tsup": "6.7.0",
+    "tsx": "3.12.7",
+    "typescript": "5.0.4"
   },
   "dependencies": {
-    "fastify": "^4.17.0"
+    "dotenv": "16.0.3",
+    "fastify": "4.17.0",
+    "zod": "3.21.4"
   }
 }
