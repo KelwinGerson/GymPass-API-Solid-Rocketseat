@@ -1,0 +1,3 @@
+npm i typescript @types/node tsx tsup -D --> TS libs for dev and prod
+npx tsc --init --> create a tsconfig.json
+npm i fastify --> http lib
