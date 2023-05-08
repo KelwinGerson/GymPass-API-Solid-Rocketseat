@@ -32,6 +32,6 @@
     "zod": "3.21.4"
   },
   "prisma": {
-    "schema": "prisma/migrations/schema.prisma"
+    "schema": "prisma/schema.prisma"
   }
 }
