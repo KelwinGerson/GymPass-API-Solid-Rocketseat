@@ -29,3 +29,38 @@
 - All list can be pagineted up to 20 items peer page;
 - JWT;
 
+---
+
+### NODE
+
+npm i typescript @types/node tsx tsup -D --> TS libs for dev and prod
+npx tsc --init --> create a tsconfig.json
+npm i fastify --> http lib
+
+---
+
+### ANOTHERS
+
+ORM -> Objetct Relational Mapper 
+    Map relationship of tables in object representations
+
+---
+### DOCKER 
+
+ docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker-pg -e POSTGRESQL_PASSWORD=dockerpg -e POSTGRESQL_DATABASE=apisolid -p 5432:5432 bitnami/postgresql:latest
+
+ The file docker-compose.yml content have a config for a new env to the docker. Is possible running with the follow command:
+
+ ```
+ docker compose up -d
+ ```
+
+---
+ ### PRISMA
+
+ ```
+ npx prisma migrate dev -> Manage and applu db schema migrations
+ 
+ npx prisma studio -> open local site for access db 
+ ```
+
