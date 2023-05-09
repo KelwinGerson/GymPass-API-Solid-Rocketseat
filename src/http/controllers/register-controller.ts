@@ -3,6 +3,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { prisma } from "src/lib/prisma";
 import { z } from "zod";
 import { hash } from "bcryptjs";
+import { registerUseCase } from "src/services/register-service";
 
 // Define the 'register' route handler function as an asynchronous function
 export async function register(request: FastifyRequest, reply: FastifyReply) {
@@ -16,29 +17,17 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     // Validate and parse the request body using the defined schema
     const { name, email, password } = registerBodySchema.parse(request.body);
 
-    // Hash the password using bcryptjs
-    const password_hash = await hash(password, 6);
-
-    // Check if there is already a user with the same email in the database
-    const userWithSameEmail = await prisma.user.findUnique({
-        where: {
-            email,
-        },
-    });
-
-    // If a user with the same email exists, send a 409 conflict status and exit the function
-    if (userWithSameEmail) {
-        return reply.status(409).send();
-    }
-
-    // Create a new user in the database with the provided name, email, and hashed password
-    await prisma.user.create({
-        data: {
+    try {
+        await registerUseCase({
             name,
             email,
-            password_hash,
-        },
-    });
+            password
+        })
+    } catch (error) {
+        return reply.status(409).send({
+            message: error
+        })
+    }
 
     // If the registration is successful, send a 201 created status
     return reply.status(201).send();
