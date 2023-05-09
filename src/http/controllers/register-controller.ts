@@ -1,9 +1,8 @@
 // Import necessary modules and objects from their respective packages
 import { FastifyRequest, FastifyReply } from "fastify";
-import { prisma } from "src/lib/prisma";
 import { z } from "zod";
-import { hash } from "bcryptjs";
-import { registerUseCase } from "src/services/register-service";
+import { RegisterUseCase } from "src/services/register-service";
+import { PrismaUserRepository } from "src/repositories/prisma-users-repositories";
 
 // Define the 'register' route handler function as an asynchronous function
 export async function register(request: FastifyRequest, reply: FastifyReply) {
@@ -18,7 +17,10 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     const { name, email, password } = registerBodySchema.parse(request.body);
 
     try {
-        await registerUseCase({
+        const prismaUsersRepository = new PrismaUserRepository()
+        const registerUseCase = new RegisterUseCase(prismaUsersRepository)
+
+        await registerUseCase.execute({
             name,
             email,
             password
