@@ -2,7 +2,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 import { RegisterUseCase } from "src/services/register-service";
-import { PrismaUserRepository } from "src/repositories/prisma-users-repositories";
+import { PrismaUserRepository } from "src/repositories/prisma/prisma-users-repositories";
 
 // Define the 'register' route handler function as an asynchronous function
 export async function register(request: FastifyRequest, reply: FastifyReply) {
@@ -25,9 +25,9 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
             email,
             password
         })
-    } catch (error) {
+    } catch (err) {
         return reply.status(409).send({
-            message: error
+            err
         })
     }
 
