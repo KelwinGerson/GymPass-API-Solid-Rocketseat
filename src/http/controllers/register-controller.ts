@@ -3,6 +3,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { z } from "zod";
 import { RegisterUseCase } from "src/services/register-service";
 import { PrismaUserRepository } from "src/repositories/prisma/prisma-users-repositories";
+import { UserAlreadyExistsError } from "src/services/errors/user-already-exists-error";
 
 // Define the 'register' route handler function as an asynchronous function
 export async function register(request: FastifyRequest, reply: FastifyReply) {
@@ -26,9 +27,12 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
             password
         })
     } catch (err) {
-        return reply.status(409).send({
-            err
-        })
+        if (err instanceof UserAlreadyExistsError) {
+            return reply.status(409).send({
+                error: err.message
+            })
+        }
+        return reply.status(500).send()
     }
 
     // If the registration is successful, send a 201 created status

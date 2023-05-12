@@ -53,6 +53,7 @@ ORM -> Objetct Relational Mapper
 
  ```
  docker compose up -d
+ docker compose stop 
  ```
 
 ---
