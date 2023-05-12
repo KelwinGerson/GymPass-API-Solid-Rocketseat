@@ -32,7 +32,10 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
                 error: err.message
             })
         }
-        return reply.status(500).send()
+
+        throw err
+        
+        // return reply.status(500).send()
     }
 
     // If the registration is successful, send a 201 created status
